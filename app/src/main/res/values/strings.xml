@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Greenly</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="opsi_jawaban_01">Opsi Jawaban 01</string>
+    <string name="opsi_jawaban_02">Opsi Jawaban 02</string>
+    <string name="opsi_jawaban_03">Opsi Jawaban 03</string>
+</resources>

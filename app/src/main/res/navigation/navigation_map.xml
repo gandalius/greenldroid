@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_map"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="livscode.tes.greenly.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_answerTwoFragment"
+            app:destination="@id/answerTwoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_answerThreeFragment"
+            app:destination="@id/answerThreeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_answerOneFragment"
+            app:destination="@id/answerOneFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/answerOneFragment"
+        android:name="livscode.tes.greenly.AnswerOneFragment"
+        android:label="fragment_answer_one"
+        tools:layout="@layout/fragment_answer_one" />
+    <fragment
+        android:id="@+id/answerThreeFragment"
+        android:name="livscode.tes.greenly.AnswerThreeFragment"
+        android:label="fragment_answer_three"
+        tools:layout="@layout/fragment_answer_three" />
+    <fragment
+        android:id="@+id/answerTwoFragment"
+        android:name="livscode.tes.greenly.AnswerTwoFragment"
+        android:label="fragment_answer_two"
+        tools:layout="@layout/fragment_answer_two" />
+</navigation>
