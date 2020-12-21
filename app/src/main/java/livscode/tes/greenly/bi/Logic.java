@@ -10,13 +10,16 @@ public class Logic {
         this.listBoardingPassTxt = listBoardingPassTxt;
     }
 
-    public void partitionRow(){
+    public void partitionRow(String code){
+        int batasAwal = 0;
+        int batasAkhir=127;
+
 
     }
 
     public void partitionColumn(){
 
     }
-    
+
 
 }
