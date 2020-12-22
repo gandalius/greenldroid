@@ -10,39 +10,58 @@ public class Logic {
         this.listBoardingPassTxt = listBoardingPassTxt;
     }
 
-    public int partitionRow(String singleInput) {
+    public int eliminateRow(String singleInput) {
         String code = singleInput.substring(1, 7);
         int startValue = 0;
         int endValue = 127;
-        int middleValue = 0;
+        int currentValue = 0;
         for (int i = 0; i < code.length(); i++) {
-            middleValue = Math.round((startValue + endValue) / 2);
-            if (code.charAt(i) == 'F') {
-                endValue = middleValue;
-            } else if (code.charAt(i) == 'B') {
-                startValue = middleValue;
-            }
+            if ((endValue - startValue) == 1) {
 
+                if (code.charAt(i) == 'F') {
+                    currentValue = endValue;
+                } else if (code.charAt(i) == 'B') {
+                    currentValue = startValue;
+                }
+            } else {
+                currentValue = Math.round((startValue + endValue) / 2);
+                if (code.charAt(i) == 'F') {
+                    endValue = currentValue;
+                } else if (code.charAt(i) == 'B') {
+                    startValue = currentValue;
+                }
+            }
         }
-        return middleValue;
+        return currentValue;
     }
 
-    public int partitionColumn(String singleInput) {
-        String code = singleInput.substring(8, 10);
+    public int eliminateColumn(String singleInput) {
+        String code = singleInput.substring(1, 7);
         int startValue = 0;
-        int endValue = 7;
-        int middleValue = 0;
+        int endValue = 127;
+        int currentValue = 0;
         for (int i = 0; i < code.length(); i++) {
-             middleValue = Math.round((startValue + endValue) / 2);
-            if (code.charAt(i) == 'R') {
-                endValue = middleValue;
-            } else if (code.charAt(i) == 'L') {
-                startValue = middleValue;
+            if ((endValue - startValue) == 1) {
+
+                if (code.charAt(i) == 'F') {
+                    currentValue = endValue;
+                } else if (code.charAt(i) == 'B') {
+                    currentValue = startValue;
+                }
+            } else {
+                currentValue = Math.round((startValue + endValue) / 2);
+                if (code.charAt(i) == 'F') {
+                    endValue = currentValue;
+                } else if (code.charAt(i) == 'B') {
+                    startValue = currentValue;
+                }
             }
         }
-
-        return middleValue;
+        return currentValue;
     }
 
+    public int getSeatId(int row, int column) {
+        return (row * 8) + column;
+    }
 
 }
