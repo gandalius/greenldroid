@@ -27,7 +27,10 @@ public class LogicTest3 {
 
     @Test
     public void seatId() {
-        assertEquals(357, logic.getSeatId(44,5));
+        assertEquals(119,  logic.getSeatId(
+                logic.eliminateRow(tesInput3),
+                logic.eliminateColumn(tesInput3)
+        ));
     }
 
 

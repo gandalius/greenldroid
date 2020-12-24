@@ -16,11 +16,11 @@ public class Logic {
 
     public int eliminateRow(String singleInput) {
         String code = singleInput.substring(0, 7);
-        int lower = 1;
-        int upper = 128;
+        int lower = 0;
+        int upper = 127;
         int currentValue = 0;
         for (int i = 0; i < code.length(); i++) {
-            currentValue = (lower + upper) / 2;
+            currentValue = (int) Math.round((double) (lower + upper) / 2);
             if (code.charAt(i) == 'F') {
                 upper = currentValue;
             } else if (code.charAt(i) == 'B') {
@@ -32,11 +32,11 @@ public class Logic {
 
     public int eliminateColumn(String singleInput) {
         String code = singleInput.substring(7, singleInput.length());
-        int lower = 1;
-        int upper = 8;
+        int lower = 0;
+        int upper = 7;
         int currentValue = 0;
         for (int i = 0; i < code.length(); i++) {
-            currentValue = (lower + upper) / 2;
+            currentValue = (int) Math.round((double) (lower + upper) / 2);
             if (code.charAt(i) == 'L') {
                 upper = currentValue;
             } else if (code.charAt(i) == 'R') {
