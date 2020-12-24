@@ -6,29 +6,34 @@ public class Logic {
 
     private ArrayList<String> listBoardingPassTxt;
 
+    public Logic() {
+
+    }
+
     public Logic(ArrayList<String> listBoardingPassTxt) {
         this.listBoardingPassTxt = listBoardingPassTxt;
     }
 
     public int eliminateRow(String singleInput) {
-        String code = singleInput.substring(1, 7);
-        int startValue = 0;
-        int endValue = 127;
+        String code = singleInput.substring(0, 7);
+        int lower = 0;
+        int upper = 127;
         int currentValue = 0;
         for (int i = 0; i < code.length(); i++) {
-            if ((endValue - startValue) == 1) {
+            if ((upper - lower) == 1) {
 
                 if (code.charAt(i) == 'F') {
-                    currentValue = endValue;
+                    currentValue = lower;
                 } else if (code.charAt(i) == 'B') {
-                    currentValue = startValue;
+                    currentValue = upper;
                 }
             } else {
-                currentValue = Math.round((startValue + endValue) / 2);
+                /*currentValue = (int) Math.round((double)(startValue + endValue) / 2);*/
+                currentValue = Math.round((lower + upper) / 2);
                 if (code.charAt(i) == 'F') {
-                    endValue = currentValue;
+                    upper = currentValue;
                 } else if (code.charAt(i) == 'B') {
-                    startValue = currentValue;
+                    lower = currentValue;
                 }
             }
         }
@@ -36,24 +41,27 @@ public class Logic {
     }
 
     public int eliminateColumn(String singleInput) {
-        String code = singleInput.substring(1, 7);
-        int startValue = 0;
-        int endValue = 127;
+        String code = singleInput.substring(7, singleInput.length());
+        int lower = 0;
+        int upper = 7;
         int currentValue = 0;
         for (int i = 0; i < code.length(); i++) {
-            if ((endValue - startValue) == 1) {
-
-                if (code.charAt(i) == 'F') {
-                    currentValue = endValue;
-                } else if (code.charAt(i) == 'B') {
-                    currentValue = startValue;
+            if ((upper - lower) == 1) {
+                if (code.charAt(i) == 'L') {
+                    currentValue = lower;
+                } else if (code.charAt(i) == 'R') {
+                    currentValue = upper;
                 }
             } else {
-                currentValue = Math.round((startValue + endValue) / 2);
-                if (code.charAt(i) == 'F') {
-                    endValue = currentValue;
-                } else if (code.charAt(i) == 'B') {
-                    startValue = currentValue;
+                /*currentValue = (int) Math.round((double)(startValue + upper) / 2);
+                currentValue =(int)Math.ceil((startValue + upper) / 2);
+                currentValue = Math.round(((lower + upper)) / 2)
+                currentValue = (int) Math.round((double)(lower + upper) / 2);*/
+                currentValue = (int) Math.round((double)(lower + upper) / 2);
+                if (code.charAt(i) == 'L') {
+                    upper = currentValue;
+                } else if (code.charAt(i) == 'R') {
+                    lower = currentValue;
                 }
             }
         }
