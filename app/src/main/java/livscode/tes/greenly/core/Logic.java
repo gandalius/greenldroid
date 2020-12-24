@@ -16,56 +16,35 @@ public class Logic {
 
     public int eliminateRow(String singleInput) {
         String code = singleInput.substring(0, 7);
-        int lower = 0;
-        int upper = 127;
+        int lower = 1;
+        int upper = 128;
         int currentValue = 0;
         for (int i = 0; i < code.length(); i++) {
-            if ((upper - lower) == 1) {
-
-                if (code.charAt(i) == 'F') {
-                    currentValue = lower;
-                } else if (code.charAt(i) == 'B') {
-                    currentValue = upper;
-                }
-            } else {
-                /*currentValue = (int) Math.round((double)(startValue + endValue) / 2);*/
-                currentValue = Math.round((lower + upper) / 2);
-                if (code.charAt(i) == 'F') {
-                    upper = currentValue;
-                } else if (code.charAt(i) == 'B') {
-                    lower = currentValue;
-                }
+            currentValue = (lower + upper) / 2;
+            if (code.charAt(i) == 'F') {
+                upper = currentValue;
+            } else if (code.charAt(i) == 'B') {
+                lower = currentValue;
             }
         }
-        return currentValue;
+        return lower;
     }
 
     public int eliminateColumn(String singleInput) {
         String code = singleInput.substring(7, singleInput.length());
-        int lower = 0;
-        int upper = 7;
+        int lower = 1;
+        int upper = 8;
         int currentValue = 0;
         for (int i = 0; i < code.length(); i++) {
-            if ((upper - lower) == 1) {
-                if (code.charAt(i) == 'L') {
-                    currentValue = lower;
-                } else if (code.charAt(i) == 'R') {
-                    currentValue = upper;
-                }
-            } else {
-                /*currentValue = (int) Math.round((double)(startValue + upper) / 2);
-                currentValue =(int)Math.ceil((startValue + upper) / 2);
-                currentValue = Math.round(((lower + upper)) / 2)
-                currentValue = (int) Math.round((double)(lower + upper) / 2);*/
-                currentValue = (int) Math.round((double)(lower + upper) / 2);
-                if (code.charAt(i) == 'L') {
-                    upper = currentValue;
-                } else if (code.charAt(i) == 'R') {
-                    lower = currentValue;
-                }
+            currentValue = (lower + upper) / 2;
+            if (code.charAt(i) == 'L') {
+                upper = currentValue;
+            } else if (code.charAt(i) == 'R') {
+                lower = currentValue;
             }
+
         }
-        return currentValue;
+        return lower;
     }
 
     public int getSeatId(int row, int column) {
