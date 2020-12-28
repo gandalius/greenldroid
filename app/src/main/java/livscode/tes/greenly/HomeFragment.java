@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,15 +49,21 @@ public class HomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         binding.button1.setOnClickListener(view -> {
-
+           Navigation.findNavController(view)
+                    .navigate(HomeFragmentDirections
+                            .actionHomeFragmentToAnswerOneFragment());
         });
 
         binding.button2.setOnClickListener(view -> {
-
+            Navigation.findNavController(view)
+                    .navigate(HomeFragmentDirections
+                            .actionHomeFragmentToAnswerTwoFragment());
         });
 
         binding.button3.setOnClickListener(view -> {
-
+            Navigation.findNavController(view)
+                    .navigate(HomeFragmentDirections
+                            .actionHomeFragmentToAnswerThreeFragment());
         });
     }
 

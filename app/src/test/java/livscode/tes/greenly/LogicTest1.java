@@ -1,8 +1,5 @@
 package livscode.tes.greenly;
 
-import android.util.Log;
-
-import org.junit.Assert;
 import org.junit.Test;
 
 import livscode.tes.greenly.core.Logic;

@@ -18,8 +18,6 @@ private ActivityMainBinding viewBinding;
         View view = viewBinding.getRoot();
         setContentView(view);
 
-
-
     }
 
 

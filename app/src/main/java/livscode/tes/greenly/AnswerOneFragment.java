@@ -2,6 +2,7 @@ package livscode.tes.greenly;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,7 +14,8 @@ import livscode.tes.greenly.databinding.FragmentAnswerOneBinding;
 public class AnswerOneFragment extends Fragment {
 
 
-FragmentAnswerOneBinding binding;
+    FragmentAnswerOneBinding binding;
+
     public AnswerOneFragment() {
         // Required empty public constructor
     }
@@ -38,6 +40,13 @@ FragmentAnswerOneBinding binding;
         binding = FragmentAnswerOneBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+
     }
 
     @Override
