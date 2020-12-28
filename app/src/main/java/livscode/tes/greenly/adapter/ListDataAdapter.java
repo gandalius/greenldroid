@@ -13,10 +13,12 @@ import livscode.tes.greenly.databinding.HolderViewBoardingPassBinding;
 
 public class ListDataAdapter extends RecyclerView.Adapter<ListDataAdapter.DataViewHolder> {
 
-    ArrayList<BoardingPassEntity> boardingPassEntities;
+    private ArrayList<BoardingPassEntity> boardingPassEntities;
+    private OnDetailView onDetailView;
 
-    public ListDataAdapter(ArrayList<BoardingPassEntity> boardingPassEntities) {
+    public ListDataAdapter(ArrayList<BoardingPassEntity> boardingPassEntities, OnDetailView onDetailView) {
         this.boardingPassEntities = boardingPassEntities;
+        this.onDetailView = onDetailView;
     }
 
     @NonNull
@@ -28,10 +30,9 @@ public class ListDataAdapter extends RecyclerView.Adapter<ListDataAdapter.DataVi
                                 LayoutInflater.from(parent.getContext()),
                                 parent,
                                 false
-                )
+                        )
         );
     }
-
 
 
     @Override
@@ -39,7 +40,9 @@ public class ListDataAdapter extends RecyclerView.Adapter<ListDataAdapter.DataVi
         BoardingPassEntity b = boardingPassEntities.get(position);
         DataViewHolder holder1 = holder;
         holder1.binding.boardingPassCode.setText(b.getBoardingPassCode());
-        holder1.binding.seatId.setText(String.valueOf(b.getSeatId()));
+        holder1.binding.seatId.setText("Seat ID : " + String.valueOf(b.getSeatId()));
+        holder1.binding.row.setText("Row : " + String.valueOf(b.getRow()));
+        holder1.binding.column.setText("Column : " + String.valueOf(b.getColumn()));
     }
 
     @Override
@@ -50,10 +53,15 @@ public class ListDataAdapter extends RecyclerView.Adapter<ListDataAdapter.DataVi
     class DataViewHolder extends RecyclerView.ViewHolder {
 
         HolderViewBoardingPassBinding binding;
+
         public DataViewHolder(HolderViewBoardingPassBinding itemView) {
             super(itemView.getRoot());
             binding = itemView;
         }
 
+    }
+
+    public interface OnDetailView {
+        void onDetail(BoardingPassEntity boardingPassEntity);
     }
 }
