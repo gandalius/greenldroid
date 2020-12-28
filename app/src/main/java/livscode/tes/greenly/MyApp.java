@@ -14,7 +14,8 @@ import java.util.ArrayList;
 public class MyApp extends Application {
     private static final String TAG = MyApp.class.getSimpleName();
 
-    private ArrayList<String> boardingPassCode = new ArrayList<>();
+    private static ArrayList<String> boardingPassCode = new ArrayList<>();
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -26,19 +27,26 @@ public class MyApp extends Application {
             input = assetManager.open("input1.txt");
             reader = new BufferedReader(new InputStreamReader(input));
             String line = reader.readLine();
+            int i = 0;
             while (line != null) {
-                System.out.println(line);
+                i++;
                 // read next line
                 line = reader.readLine();
-                boardingPassCode.add(line);
+                if (null != line) {
+                    boardingPassCode.add(line);
+                }
+
+
+
             }
+            System.out.println(i);
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<String> getBoardingPassCode() {
+    public static ArrayList<String> getBoardingPassCode() {
         return boardingPassCode;
     }
 }

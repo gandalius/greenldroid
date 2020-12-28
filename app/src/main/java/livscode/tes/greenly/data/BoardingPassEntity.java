@@ -5,6 +5,11 @@ public class BoardingPassEntity {
     private String boardingPassCode;
     private int seatId;
 
+    public BoardingPassEntity(String boardingPassCode, int seatId) {
+        this.boardingPassCode = boardingPassCode;
+        this.seatId = seatId;
+    }
+
     public String getBoardingPassCode() {
         return boardingPassCode;
     }

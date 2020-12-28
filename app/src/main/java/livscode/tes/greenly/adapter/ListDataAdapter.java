@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import livscode.tes.greenly.data.BoardingPassEntity;
 import livscode.tes.greenly.databinding.HolderViewBoardingPassBinding;
 
-public class ListData extends RecyclerView.Adapter<ListData.DataViewHolder> {
+public class ListDataAdapter extends RecyclerView.Adapter<ListDataAdapter.DataViewHolder> {
 
     ArrayList<BoardingPassEntity> boardingPassEntities;
 
-    public ListData(ArrayList<BoardingPassEntity> boardingPassEntities) {
+    public ListDataAdapter(ArrayList<BoardingPassEntity> boardingPassEntities) {
         this.boardingPassEntities = boardingPassEntities;
     }
 
@@ -39,12 +39,12 @@ public class ListData extends RecyclerView.Adapter<ListData.DataViewHolder> {
         BoardingPassEntity b = boardingPassEntities.get(position);
         DataViewHolder holder1 = holder;
         holder1.binding.boardingPassCode.setText(b.getBoardingPassCode());
-        holder1.binding.seatId.setText(b.getSeatId());
+        holder1.binding.seatId.setText(String.valueOf(b.getSeatId()));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return boardingPassEntities.size();
     }
 
     class DataViewHolder extends RecyclerView.ViewHolder {

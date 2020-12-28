@@ -10,7 +10,6 @@ public class LogicTest1 {
     private Logic logic = new Logic();
     private String tesInput1 ="FBFBBFFRLR";
 
-
     @Test
     public void eliminasiBarisInput1() {
         assertEquals(44, logic.eliminateRow(tesInput1));
@@ -20,8 +19,6 @@ public class LogicTest1 {
     public void eliminasiKolomInput1() {
         assertEquals(5, logic.eliminateColumn(tesInput1));
     }
-
-
 
     @Test
     public void seatId() {
