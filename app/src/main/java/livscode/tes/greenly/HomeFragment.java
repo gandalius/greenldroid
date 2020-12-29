@@ -139,6 +139,7 @@ public class HomeFragment extends Fragment implements
 
                 }
 
+                listDataAdapter.setList(listEntity);
                 listDataAdapter.notifyDataSetChanged();
                 binding.textView.setText(String.valueOf(listEntity.size()));
                 binding.progressbar.setVisibility(View.GONE);
@@ -149,17 +150,18 @@ public class HomeFragment extends Fragment implements
     private void sorting() {
         binding.progressbar.setVisibility(View.VISIBLE);
                 //Collections.sort(listEntity,seatIdSortComparator);
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+
                     List<BoardingPassEntity> sortedList = listEntity.stream()
                             .sorted(seatIdSortComparator)
                             .collect(Collectors.toList());
-                    listDataAdapter = new ListDataAdapter(sortedList,this::onDetail);
+                    //listDataAdapter = new ListDataAdapter(sortedList,this::onDetail);
+                    listDataAdapter.setList(sortedList);
                     binding.listRecycleview.setAdapter(listDataAdapter);
                     binding.listRecycleview.setLayoutManager(new LinearLayoutManager(getContext()));
                     listDataAdapter.notifyDataSetChanged();
                     binding.textView.setText(String.valueOf(listEntity.size()));
                     binding.progressbar.setVisibility(View.GONE);
-                }
+
 
 
     }

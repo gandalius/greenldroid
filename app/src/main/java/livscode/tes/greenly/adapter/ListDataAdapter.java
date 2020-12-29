@@ -35,6 +35,12 @@ public class ListDataAdapter extends RecyclerView.Adapter<ListDataAdapter.DataVi
         return valueFilter;
     }
 
+    public void setList(List<BoardingPassEntity> sortedList) {
+        this.boardingPassEntities =  sortedList;
+        this.boardingPassEntitiesFiltered = sortedList;
+        notifyDataSetChanged();
+    }
+
     static class DataViewHolder extends RecyclerView.ViewHolder {
 
         HolderViewBoardingPassBinding binding;
