@@ -3,9 +3,12 @@ package livscode.tes.greenly;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,28 +60,73 @@ public class HomeFragment extends Fragment implements
         super.onActivityCreated(savedInstanceState);
         listDataAdapter = new ListDataAdapter(listEntity,this::onDetail);
         binding.listRecycleview.setAdapter(listDataAdapter);
-        //binding.listRecycleview.setLayoutManager(new GridLayoutManager(getContext(), 8));
         binding.listRecycleview.setLayoutManager(new LinearLayoutManager(getContext()));
-        inputListString = MyApp.getBoardingPassCode();
+
         strToEntity();
-        binding.button.setOnClickListener(view -> {
+        binding.buttonReset.setOnClickListener(view -> {
             strToEntity();
         });
+        binding.buttonMax.setOnClickListener(view -> {
+
+        });
+
+        binding.searchView.setQueryHint("Find Boarding Pass Code..");
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String keyword) {
+                //progressBar.setVisibility(View.VISIBLE);
+                if (keyword.length() > 0) {
+                    find(keyword);
+                }else {
+                    strToEntity();
+                }
+
+                return false;
+            }
+        });
+
+        binding.searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                strToEntity();
+                return false;
+            }
+        });
+
+    }
+
+    public void find(String key){
+        listDataAdapter.getFilter().filter(key);
     }
 
     private void strToEntity() {
-        BoardingPassEntity entity;
-        for (String input : inputListString) {
-            logic = new Logic();
-            int row = logic.eliminateRow(input);
-            int column = logic.eliminateRow(input);
-            int seatID = logic.getSeatId(row,column);
-            entity = new BoardingPassEntity(input,seatID,row,column);
-            listEntity.add(entity);
-        }
-
+        binding.progressbar.setVisibility(View.VISIBLE);
+        listEntity.clear();
         listDataAdapter.notifyDataSetChanged();
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                BoardingPassEntity entity;
+                inputListString = MyApp.getBoardingPassCode();
+                for (String input : inputListString) {
+                    logic = new Logic();
+                    int row = logic.eliminateRow(input);
+                    int column = logic.eliminateRow(input);
+                    int seatID = logic.getSeatId(row,column);
+                    entity = new BoardingPassEntity(input,seatID,row,column);
+                    listEntity.add(entity);
+                }
 
+                listDataAdapter.notifyDataSetChanged();
+                binding.progressbar.setVisibility(View.GONE);
+            }
+        }, 3000);
     }
 
 

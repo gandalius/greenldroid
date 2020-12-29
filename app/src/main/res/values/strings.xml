@@ -7,4 +7,8 @@
     <string name="opsi_jawaban_03">Opsi Jawaban 03</string>
     <string name="seat_id">Seat ID :</string>
     <string name="code">FBFBBFFRLR</string>
+    <string name="find_bpass">Find Boarding Pass Code..</string>
+    <string name="proses">Proses</string>
+    <string name="max_seat">Max Seat</string>
+    <string name="filtering_boarding_pass">Filtering Boarding Pass</string>
 </resources>

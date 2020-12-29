@@ -17,7 +17,9 @@ private ActivityMainBinding viewBinding;
         viewBinding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = viewBinding.getRoot();
         setContentView(view);
-
+        getSupportActionBar().setElevation(0);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
     }
 
 
