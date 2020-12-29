@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import livscode.tes.greenly.data.BoardingPassEntity;
 import livscode.tes.greenly.databinding.HolderViewBoardingPassBinding;
@@ -16,12 +17,12 @@ import livscode.tes.greenly.databinding.HolderViewBoardingPassBinding;
 public class ListDataAdapter extends RecyclerView.Adapter<ListDataAdapter.DataViewHolder>
         implements Filterable {
 
-    private static ArrayList<BoardingPassEntity> boardingPassEntities,boardingPassEntitiesFiltered;
+    private static List<BoardingPassEntity> boardingPassEntities,boardingPassEntitiesFiltered;
     private OnDetailView onDetailView;
     private ValueFilter valueFilter;
 
-    public ListDataAdapter(ArrayList<BoardingPassEntity> boardingPassEntities, OnDetailView onDetailView) {
-        this.boardingPassEntities = boardingPassEntities;
+    public ListDataAdapter(List<BoardingPassEntity> boardingPassEntities, OnDetailView onDetailView) {
+        this.boardingPassEntities =  boardingPassEntities;
         this.boardingPassEntitiesFiltered = boardingPassEntities;
         this.onDetailView = onDetailView;
     }

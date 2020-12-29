@@ -14,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import livscode.tes.greenly.adapter.ListDataAdapter;
 import livscode.tes.greenly.core.Logic;
@@ -27,7 +31,18 @@ public class HomeFragment extends Fragment implements
     private ListDataAdapter listDataAdapter;
     private ArrayList<String> inputListString;
     private Logic logic;
-    private ArrayList<BoardingPassEntity> listEntity = new ArrayList<>();
+    private List<BoardingPassEntity> listEntity = new ArrayList<>();
+    public static Comparator<BoardingPassEntity> seatIdSortComparator = new Comparator<BoardingPassEntity>() {
+        @Override
+        public int compare(BoardingPassEntity s1, BoardingPassEntity s2) {
+             /*For ascending order*//*
+            //return s1.getSeatId()-s2.getSeatId();
+
+            /*For descending order  */
+            return s2.getSeatId()-s1.getSeatId();
+
+        }
+    };
 
     public HomeFragment() {
         // Required empty public constructor
@@ -61,13 +76,13 @@ public class HomeFragment extends Fragment implements
         listDataAdapter = new ListDataAdapter(listEntity,this::onDetail);
         binding.listRecycleview.setAdapter(listDataAdapter);
         binding.listRecycleview.setLayoutManager(new LinearLayoutManager(getContext()));
-
         strToEntity();
         binding.buttonReset.setOnClickListener(view -> {
             strToEntity();
         });
         binding.buttonMax.setOnClickListener(view -> {
-
+            //listEntity.sort(seatIdSortComparator);
+           sorting();
         });
 
         binding.searchView.setQueryHint("Find Boarding Pass Code..");
@@ -117,16 +132,36 @@ public class HomeFragment extends Fragment implements
                 for (String input : inputListString) {
                     logic = new Logic();
                     int row = logic.eliminateRow(input);
-                    int column = logic.eliminateRow(input);
+                    int column = logic.eliminateColumn(input);
                     int seatID = logic.getSeatId(row,column);
                     entity = new BoardingPassEntity(input,seatID,row,column);
                     listEntity.add(entity);
+
                 }
 
                 listDataAdapter.notifyDataSetChanged();
+                binding.textView.setText(String.valueOf(listEntity.size()));
                 binding.progressbar.setVisibility(View.GONE);
             }
         }, 3000);
+    }
+
+    private void sorting() {
+        binding.progressbar.setVisibility(View.VISIBLE);
+                //Collections.sort(listEntity,seatIdSortComparator);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    List<BoardingPassEntity> sortedList = listEntity.stream()
+                            .sorted(seatIdSortComparator)
+                            .collect(Collectors.toList());
+                    listDataAdapter = new ListDataAdapter(sortedList,this::onDetail);
+                    binding.listRecycleview.setAdapter(listDataAdapter);
+                    binding.listRecycleview.setLayoutManager(new LinearLayoutManager(getContext()));
+                    listDataAdapter.notifyDataSetChanged();
+                    binding.textView.setText(String.valueOf(listEntity.size()));
+                    binding.progressbar.setVisibility(View.GONE);
+                }
+
+
     }
 
 
@@ -140,4 +175,6 @@ public class HomeFragment extends Fragment implements
     public void onDetail(BoardingPassEntity boardingPassEntity) {
 
     }
+
+
 }
