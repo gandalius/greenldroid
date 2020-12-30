@@ -27,19 +27,13 @@ public class MyApp extends Application {
             input = assetManager.open("input1.txt");
             reader = new BufferedReader(new InputStreamReader(input));
             String line = reader.readLine();
-            int i = 0;
             while (line != null) {
-                i++;
-                // read next line
+                boardingPassCode.add(line);
                 line = reader.readLine();
-                if (null != line) {
-                    boardingPassCode.add(line);
-                }
+               /* if (null != line) {
 
-
-
+                }*/
             }
-            System.out.println(i);
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();

@@ -25,7 +25,7 @@ import livscode.tes.greenly.data.BoardingPassEntity;
 import livscode.tes.greenly.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment implements
-    ListDataAdapter.OnDetailView{
+        ListDataAdapter.OnDetailView {
 
     FragmentHomeBinding binding;
     private ListDataAdapter listDataAdapter;
@@ -35,11 +35,11 @@ public class HomeFragment extends Fragment implements
     public static Comparator<BoardingPassEntity> seatIdSortComparator = new Comparator<BoardingPassEntity>() {
         @Override
         public int compare(BoardingPassEntity s1, BoardingPassEntity s2) {
-             /*For ascending order*//*
+            /*For ascending order*//*
             //return s1.getSeatId()-s2.getSeatId();
 
             /*For descending order  */
-            return s2.getSeatId()-s1.getSeatId();
+            return s2.getSeatId() - s1.getSeatId();
 
         }
     };
@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment implements
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        listDataAdapter = new ListDataAdapter(listEntity,this::onDetail);
+        listDataAdapter = new ListDataAdapter(listEntity, this::onDetail);
         binding.listRecycleview.setAdapter(listDataAdapter);
         binding.listRecycleview.setLayoutManager(new LinearLayoutManager(getContext()));
         strToEntity();
@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment implements
         });
         binding.buttonMax.setOnClickListener(view -> {
             //listEntity.sort(seatIdSortComparator);
-           sorting();
+            sorting();
         });
 
         binding.searchView.setQueryHint("Find Boarding Pass Code..");
@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment implements
                 //progressBar.setVisibility(View.VISIBLE);
                 if (keyword.length() > 0) {
                     find(keyword);
-                }else {
+                } else {
                     strToEntity();
                 }
 
@@ -116,7 +116,7 @@ public class HomeFragment extends Fragment implements
 
     }
 
-    public void find(String key){
+    public void find(String key) {
         listDataAdapter.getFilter().filter(key);
     }
 
@@ -133,10 +133,9 @@ public class HomeFragment extends Fragment implements
                     logic = new Logic();
                     int row = logic.eliminateRow(input);
                     int column = logic.eliminateColumn(input);
-                    int seatID = logic.getSeatId(row,column);
-                    entity = new BoardingPassEntity(input,seatID,row,column);
+                    int seatID = logic.getSeatId(row, column);
+                    entity = new BoardingPassEntity(input, seatID, row, column);
                     listEntity.add(entity);
-
                 }
 
                 listDataAdapter.setList(listEntity);
@@ -149,21 +148,17 @@ public class HomeFragment extends Fragment implements
 
     private void sorting() {
         binding.progressbar.setVisibility(View.VISIBLE);
-                //Collections.sort(listEntity,seatIdSortComparator);
-
-                    List<BoardingPassEntity> sortedList = listEntity.stream()
-                            .sorted(seatIdSortComparator)
-                            .collect(Collectors.toList());
-                    //listDataAdapter = new ListDataAdapter(sortedList,this::onDetail);
-                    listDataAdapter.setList(sortedList);
-                    binding.listRecycleview.setAdapter(listDataAdapter);
-                    binding.listRecycleview.setLayoutManager(new LinearLayoutManager(getContext()));
-                    listDataAdapter.notifyDataSetChanged();
-                    binding.textView.setText(String.valueOf(listEntity.size()));
-                    binding.progressbar.setVisibility(View.GONE);
-
-
-
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                List<BoardingPassEntity> sortedList = listEntity.stream()
+                        .sorted(seatIdSortComparator)
+                        .collect(Collectors.toList());
+                listDataAdapter.setList(sortedList);
+                binding.textView.setText(String.valueOf(listEntity.size()));
+                binding.progressbar.setVisibility(View.GONE);
+            }
+        }, 3000);
     }
 
 

@@ -1,10 +1,8 @@
 package livscode.tes.greenly;
 
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import livscode.tes.greenly.core.Logic;
-
-import static junit.framework.TestCase.assertEquals;
 
 public class LogicTest3 {
     private Logic logic = new Logic();

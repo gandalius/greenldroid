@@ -1,12 +1,12 @@
 package livscode.tes.greenly;
 
-import org.junit.Test;
-
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import livscode.tes.greenly.core.Logic;
 
-import static junit.framework.TestCase.assertEquals;
-
-public class LogicTest5 {
+@DisplayName("First Seat ID")
+public class LogicFirstSeat {
     private Logic logic = new Logic();
 
     private String tesInput4 ="FFFFFFFLLL";

@@ -45,7 +45,12 @@ public class BoardingPassEntity {
         this.seatId = seatId;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "BoardingPassEntity{" +
+                "seatId=" + seatId +
+                ", row=" + row +
+                ", column=" + column +
+                '}';
+    }
 }

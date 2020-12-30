@@ -69,12 +69,12 @@
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/card_vw_filter"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="45dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        card_view:cardCornerRadius="18dp"
+                        card_view:cardCornerRadius="20dp"
                         card_view:cardElevation="0dp">
 
                         <androidx.appcompat.widget.SearchView

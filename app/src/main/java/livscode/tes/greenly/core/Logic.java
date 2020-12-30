@@ -1,5 +1,11 @@
 package livscode.tes.greenly.core;
 
+import android.content.res.AssetManager;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Logic {
@@ -10,7 +16,12 @@ public class Logic {
 
     }
 
-    public Logic(ArrayList<String> listBoardingPassTxt) {
+
+    public ArrayList<String> getListBoardingPassTxt() {
+        return listBoardingPassTxt;
+    }
+
+    public void setListBoardingPassTxt(ArrayList<String> listBoardingPassTxt) {
         this.listBoardingPassTxt = listBoardingPassTxt;
     }
 
@@ -32,20 +43,20 @@ public class Logic {
 
     public int eliminateColumn(String singleInput) {
         String code = singleInput.substring(7, singleInput.length());
-        int lower = 0;
-        int upper = 8;
+        int lower = 1;
+        int upper = 9;
         int currentValue;
         for (int i = 0; i < code.length(); i++) {
-            currentValue = (int) Math.round((double) (lower + upper) / 2);
+            currentValue = (int) Math.floor((double) (lower + upper) / 2);
             if (code.charAt(i) == 'L') {
                 upper = currentValue;
             } else if (code.charAt(i) == 'R') {
                 lower = currentValue;
             }
-
         }
 
-        return lower == 0 ? 1 : lower;
+        //return lower == 0 ? 1 : lower;
+        return lower;
     }
 
     public int getSeatId(int row, int column) {
